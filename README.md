@@ -22,13 +22,13 @@ I first looked at the accuracy of the sentiment scoring across the last 10 comme
 
 At the highest level, number of comments and sentiment over time were largely as expected over the last 2 years, with both picking up meaningfully in 2H23, once the market improved.
 
-![Sentiment](sentiment_over_time.png)
-![Mentions](mentions_over_time.png)
+   ![Sentiment](sentiment_over_time.png)
+   ![Mentions](mentions_over_time.png)
 
 I then broke out the comments into individual coin references (as many comments had multiple coins) and initially used this to build a daily and weekly bar chart of the latest 'shills' with the feature 'shill score' as sentiment * number of comments.
 
-![Dailyshills](daily_shills.png)
-![Weeklyshills](weekly_shills.png)
+   ![Dailyshills](daily_shills.png)
+   ![Weeklyshills](weekly_shills.png)
 
 I then built a coin specific dataframe, combining sentiment data and price/ technicals. I used this initially to create a 'shill chart', as below and could be useful in monitoring increasing hype/sentiment in real time.
 
