@@ -14,7 +14,7 @@ I found the accuracy to be much better than the initial vaderSentiment library t
 
 https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest
 
-   ![STRD](STRD_pullback.png)
+   ![STRD](./images/STRD_pullback.png)
 
 This was done in Colab as the Hugging Face library generaly needed to be run on a GPU cluster. This file can be run on a sporadic basis and updated, and then master_sentiment_new.csv is imported back to the main notebook.
 
@@ -110,7 +110,7 @@ I did this across 20 high profile large cap coins and the results were encouragi
 
    ![Hist_returns](Hist_returns.png)
 
-Comparing this to ETH, which is a reasonable benchmark for most coins, the return over a similar period (assuming the strategies started in mid 2021- mid 2022 was roughly up 100% to flat depending on the starting point. So on that basis, the strategy did fairly well and I think there are far better ways to maintain exposure to the large moves (10 day EMA break for example whihc works like a more sophisticated trailing stop) than my current approach which is to be long for 14 days and this accounts for some of the weak results we see in the time series testing where the strategy failed to remain exposed to the big late 2021 moves which were critical for compounding total return over time. Frankly I could also be more robust on the backtesting here, but it's at least directionally encouraging.
+Comparing this to ETH, which is a reasonable benchmark for most coins, the return over a similar period (assuming the strategies started in mid 2021- mid 2022 was roughly up 100% to flat depending on the starting point. So on that basis, the strategy did fairly well and I think there are far better ways to maintain exposure to the large moves (10 day EMA break for example which works like a more sophisticated trailing stop) than my current approach which is to be long for 14 days and this accounts for some of the weak results we see in the time series testing where the strategy failed to remain exposed to the big late 2021 moves which were critical for compounding total return over time. Frankly I could also be more robust on the backtesting here, but it's at least directionally encouraging.
 
 #### So in conclusion, in answer to our original problem statement, it appears there may be some, albeit weak correlation between Telegram sentiment and Shill score and forward returns based on regression and Shap analysis. As part of a clustering strategy, the returns do seem to be fairly compelling, though there doesn't seem to be much positive correlation between the mean returns of the clusters and the shill score, sentiment or number of mentions. The social media data is however intersting and can help identify growing hype around a specific coin, as can be seen in the BONK shill score chart above.
 
