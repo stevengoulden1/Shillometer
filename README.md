@@ -32,7 +32,7 @@ I then broke out the comments into individual coin references (as many comments 
 
 I then built a coin specific dataframe, combining sentiment data and price/ technicals. I used this initially to create a 'shill chart', as below and could be useful in monitoring increasing hype/sentiment in real time.
 
-   ![shill_chart](shill_chart.png)
+   ![shill_chart](SOL_shill.png)
    
 And also for BONK, a popular memecoin
 
