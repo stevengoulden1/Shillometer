@@ -48,7 +48,7 @@ I then built a random forest model (I had initially tried linear regression with
    ![RF scatter](rf_scatter_sol.png)
    ![RF scatter RNDR](rf_scatter_rndr.png)
 
-I tried Shap analysis, which was slightly more encouraging, and showed there might be some weak positive correlation for shill score and number of mentions, and as below, we can see this was also the case for another coin, RNDR. 
+I tried Shap analysis, which was slightly more encouraging, and showed there might be some weak positive correlation for shill score and number of mentions.
 
    ![SHAP](shap.png)
    ![SHAP Shill](shap_shill.png)
@@ -69,13 +69,13 @@ So I used 5 clusters which I had troughly optimised using silhouette and inertia
    
 While there was a positive return for SOL's social media data, for other coins the results were fairly inconclusive. Here we have BTC, DOGE, OP and RNDR.
 
-   ![box_BTC]('BTC_boxplots.png)
+   ![box_BTC](BTC_boxplots.png)
    
-   ![box_DOGE]('boxplots_doge.png)
+   ![box_DOGE](boxplots_doge.png)
    
-   ![box_OP]('boxplots_op.png)
+   ![box_OP](boxplots_op.png)
    
-   ![box_RNDR]('boxplots_rndr.png)
+   ![box_RNDR](boxplots_rndr.png)
 
    
 #### Building a strategy
