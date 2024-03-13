@@ -48,7 +48,7 @@ And also for BONK, a popular memecoin
 
 I then began to explore whether we could build a predictive model using the datasets on a coin specific basis. Initial correlation analysis was not desperately encouraging, with some small positive correlation for shill, sentiment, and number of mentions for Solana at least, but across 15 arge cap coins, the results were very weak. 
 
-I then built a random forest model (I had initially tried linear regression with very weak results) against 7 day forward returns, which led to fairly weak results on test data (very strong 0.9 R^2 on training data hence the model was extremely overfit) and I had similar results from support vector machines regression.
+I then built a random forest model (I had initially tried linear regression with very weak results) against 7 day forward returns, which led to fairly weak results on test data (very strong 0.9 R^2 on training data hence the model was extremely overfit) and I had similar results from support vector machines regression. The below charts are for SOL and RNDR.
 
    ![RF scatter](rf_scatter_sol.png)
    
@@ -95,7 +95,7 @@ The algorithm appeared to identify early stage momentum breakout trades from the
 
    ![sol_buy_signals](sol_buy_signals.png)
 
-I then tried the same approach but using Principal Component Analysis for dimensionality reduction. I used 4 pricinpal components as this explained 70-80% of the variance in my data and I thought this migh help improve clustering. The results were mixed in terms of silhouette and inertia scores, but generally I found the backtested performance to be slightly better for the top performing clusters.
+I then tried the same approach but using Principal Component Analysis for dimensionality reduction. I used 4 princopal components as this explained 70-80% of the variance in my data and I thought this might help improve clustering. The results were mixed in terms of silhouette and inertia scores, but generally I found the backtested performance to be slightly better for the top performing clusters.
 
    ![PCA1_2_SOL.png](PCA1_2_SOL.png)
    
