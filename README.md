@@ -6,6 +6,8 @@
 
 #### Data Collection
 
+See Shillometer_TG_HF.ipynb
+
 I used the Telethon library to scrape 12 active groups in Telegram. I managed to scrape around 200k comments over the last 2 years. I then created a function to identify the coins referenced in the comment, or in the earlier thread, if the message itself was a reply.
 
 I then ran each comment through a Hugging Face library that had been trained on 124m tweets. More specifically, this was a roBERTa model (robustly optimized BERT pre-training approach, a pretrained NLP and hyperparameter optimised model which builds on BERT, an AI language model developed by Google in 2018 - Bidirectional Encoder Representations).
@@ -20,6 +22,8 @@ This was done in Colab as the Hugging Face library generally needed to be run on
 
 
 #### EDA
+
+See TG_Scraper_final.ipynb
 
 I first looked at the accuracy of the sentiment scoring across the last 10 comments and then refined for the >5 or <-5 scores. I found the accuracy to be somewhat on low conviction/neutral comments, and there were many of these as comment threads would often stray off topic and most comments were somewhat neutral or of low relevance. That said, I found the broad scoring approach, particularly for the higher scoring rows to be generally accurate, at least in identifying high conviction positive or negative comments.
 
