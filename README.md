@@ -1,6 +1,6 @@
 # Shillometer
 
-Using sentiment analysis from crypto telegram groups and K means clustering to identify high conviction trade entries
+#### Using sentiment analysis from crypto telegram groups and K means clustering to identify high conviction trade entries.
 
 ### Problem statement: Crypto markets are heavily driven by sentiment and narratives. Explore scraping social media to get a sense for when these narratives might be building, in order to identify trade opportunities. To do this, scrape high volume public Telegram groups and perform sentiment analysis on the results, then use that data as a feature within a number of machine learning m models. If any of these models show promise, build a trade strategy and backtest this over the last 3-4 years, when. most of the major focus coins in today's market went live or saw their largest periods of price appreciation.
 
@@ -14,7 +14,10 @@ I found the accuracy to be much better than the initial vaderSentiment library t
 
 https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest
 
+   ![STRD](STRD_pullback.png)
+
 This was done in Colab as the Hugging Face library generaly needed to be run on a GPU cluster. This file can be run on a sporadic basis and updated, and then master_sentiment_new.csv is imported back to the main notebook.
+
 
 #### EDA
 
@@ -23,11 +26,13 @@ I first looked at the accuracy of the sentiment scoring across the last 10 comme
 At the highest level, number of comments and sentiment over time were largely as expected over the last 2 years, with both picking up meaningfully in 2H23, once the market improved.
 
    ![Sentiment](sentiment_over_time.png)
+   
    ![Mentions](mentions_over_time.png)
 
 I then broke out the comments into individual coin references (as many comments had multiple coins) and initially used this to build a daily and weekly bar chart of the latest 'shills' with the feature 'shill score' as sentiment * number of comments.
 
    ![Dailyshills](daily_shills.png)
+   
    ![Weeklyshills](weekly_shills.png)
 
 I then built a coin specific dataframe, combining sentiment data and price/ technicals. I used this initially to create a 'shill chart', as below and could be useful in monitoring increasing hype/sentiment in real time.
@@ -46,11 +51,13 @@ I then began to explore whether we could build a predictive model using the data
 I then built a random forest model (I had initially tried linear regression with very weak results) against 7 day forward returns, which led to fairly weak results on test data (very strong 0.9 R^2 on training data hence the model was extremely overfit) and I had similar results from support vector machines regression.
 
    ![RF scatter](rf_scatter_sol.png)
+   
    ![RF scatter RNDR](rf_scatter_rndr.png)
 
 I tried Shap analysis, which was slightly more encouraging, and showed there might be some weak positive correlation for shill score and number of mentions.
 
    ![SHAP](shap.png)
+   
    ![SHAP Shill](shap_shill.png)
 
 Overall though, the results for regression models were not desperately encouraging.
