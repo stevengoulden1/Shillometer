@@ -16,12 +16,12 @@ https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest
 
    ![STRD](./images/STRD_pullback.png)
 
-This was done in Colab as the Hugging Face library generaly needed to be run on a GPU cluster. This file can be run on a sporadic basis and updated, and then master_sentiment_new.csv is imported back to the main notebook.
+This was done in Colab as the Hugging Face library generally needed to be run on a GPU cluster. This file can be run on a sporadic basis and updated, and then master_sentiment_new.csv is imported back to the main notebook.
 
 
 #### EDA
 
-I first looked at the accuracy of the sentiment scoring across the last 10 comments and then refined for the >5 or <-5 scores. I found the accuracy to be somewhat on low conviction/neutral comments, and there were many of these as comment threads would often stray off topic and most comments were somewhat neutral or of low relevance. That said, I found the broad scoring approach, particularly for the higher scoring rows to be generally accurate, at least in identifying high convition positive or negative comments.
+I first looked at the accuracy of the sentiment scoring across the last 10 comments and then refined for the >5 or <-5 scores. I found the accuracy to be somewhat on low conviction/neutral comments, and there were many of these as comment threads would often stray off topic and most comments were somewhat neutral or of low relevance. That said, I found the broad scoring approach, particularly for the higher scoring rows to be generally accurate, at least in identifying high conviction positive or negative comments.
 
 At the highest level, number of comments and sentiment over time were largely as expected over the last 2 years, with both picking up meaningfully in 2H23, once the market improved.
 
@@ -35,7 +35,7 @@ I then broke out the comments into individual coin references (as many comments 
    
    ![Weeklyshills](./images/weekly_shills.png)
 
-I then built a coin specific dataframe, combining sentiment data and price/ technicals. I used this initially to create a 'shill chart', as below and could be useful in monitoring increasing hype/sentiment in real time.
+I then built a coin specific dataframe, combining sentiment data and price/ technicals. I used this initially to create a 'shill chart', as below and could be useful in monitoring increasing hype/sentiment in real time. The following charts are for SOL unless otherwise indicated.
 
    ![shill_chart](./images/SOL_shill.png)
    
@@ -46,7 +46,7 @@ And also for BONK, a popular memecoin
 
 #### Regression modelling
 
-I then began to explore whether we could build a predictive model using the datasets on a coin specific basis. Initial correlation analysis was not desperately encouraging, with some small positive correlation for shill, sentiment, and number of mentions for Solana at least, but across 15 arge cap coins, the results were very weak. 
+I then began to explore whether we could build a predictive model using the datasets on a coin specific basis. Initial correlation analysis was not desperately encouraging, with some small positive correlation for shill, sentiment, and number of mentions for Solana at least, but across 15 large cap coins, the results were very weak. 
 
 I then built a random forest model (I had initially tried linear regression with very weak results) against 7 day forward returns, which led to fairly weak results on test data (very strong 0.9 R^2 on training data hence the model was extremely overfit) and I had similar results from support vector machines regression. The below charts are for SOL and RNDR.
 
@@ -70,7 +70,7 @@ However there might well be clustered instances where the 'stars align' - for ex
 
 Essentially we are looking for the stars to align across a number of metrics and k-means might be able to identify these clusters in a way that regression couldn't.
 
-So I used 5 clusters which I had troughly optimised using silhouette and inertia scores (ie using a number of clusters, 'k' to arrive at the most densely packed clusters across the various dimensions, or features). I did this without forward return data so that the model wouldn't learn future returns and be overfit, ie to avoid information leakage. I then appended the returns so that we could rank the clusters by forward return performance. Other than the top performing bucket which identified deep value/ oversold trades, the results for Solana showed a weak positive return to the social media data, but generally positive correlation to momentum features such as RSI or 10/20 ema. 
+So, I used 5 clusters which I had roughly optimised using silhouette and inertia scores (ie using a number of clusters, 'k' to arrive at the most densely packed clusters across the various dimensions, or features). I did this without forward return data so that the model wouldn't learn future returns and be overfit, ie to avoid information leakage. I then appended the returns so that we could rank the clusters by forward return performance. Other than the top performing bucket which identified deep value/ oversold trades, the results for Solana showed a weak positive return to the social media data, but generally positive correlation to momentum features such as RSI or 10/20 ema. 
 
    ![box_SOL](./images/sol_boxplots.png)
    
@@ -87,7 +87,7 @@ While there was a positive return for SOL's social media data, for other coins t
    
 #### Building a strategy
 
-I then broke out performance by cluster using a strategy of holding for 14 days and cutting at a 10% stop loss. Of course this was identifying the strongest cluster after the fact but I found that there were certain clusters that significantly outperformed, in most cases due to the compound impact of being exposed to the 2021 bull run, along with early and late 2023. 
+I then broke out performance by cluster using a strategy of holding for 14 days and cutting at a 10% stop loss. Of course, this was identifying the strongest cluster after the fact but I found that there were certain clusters that significantly outperformed, in most cases due to the compound impact of being exposed to the 2021 bull run, along with early and late 2023. 
 
    ![sol_cumulative](./images/sol_cumulative.png)
 
@@ -95,7 +95,7 @@ The algorithm appeared to identify early stage momentum breakout trades from the
 
    ![sol_buy_signals](./images/sol_buy_signals.png)
 
-I then tried the same approach but using Principal Component Analysis for dimensionality reduction. I used 4 princopal components as this explained 70-80% of the variance in my data and I thought this might help improve clustering. The results were mixed in terms of silhouette and inertia scores, but generally I found the backtested performance to be slightly better for the top performing clusters.
+I then tried the same approach but using Principal Component Analysis for dimensionality reduction. I used 4 principal components as this explained 70-80% of the variance in my data and I thought this might help improve clustering. The results were mixed in terms of silhouette and inertia scores, but generally I found the backtested performance to be slightly better for the top performing clusters.
 
    ![PCA1_2_SOL.png](./images/PCA1_2_SOL.png)
    
@@ -104,15 +104,15 @@ I then tried the same approach but using Principal Component Analysis for dimens
 
 #### Using multifold time based train/test split to backtest
 
-For a more robust approach, I used a 20 fold train/test split which basically ran the k means approach up to a specific time and then chose the top performing cluster during the tst period, only trading when that cluster's signal fired. This was repeated rughly every 1-2 months thereafter on updated training data. This way we would avoid cherry picking the top performing strategies.
+For a more robust approach, I used a 20 fold train/test split which basically ran the k means approach up to a specific time and then chose the top performing cluster during the test period, only trading when that cluster's signal fired. This was repeated roughly every 1-2 months thereafter on updated training data. This way we would avoid cherry picking the top performing strategies.
 
-I did this across 20 high profile large cap coins and the results were encouraging. In fairness, what is essntially a long focused momentum strategy should have done well starting in most cases in 2021. That said, 65% of the coin strategies made money, the average return was 170%, and the average trade made 10.6% pre trading fees, though the hit rate was fairly miserable at 38%. 
+I did this across 20 high profile large cap coins and the results were encouraging. In fairness, what is essentially a long focused momentum strategy should have done well starting in most cases in 2021. That said, 65% of the coin strategies made money, the average return was 170%, and the average trade made 10.6% pre trading fees, though the hit rate was fairly miserable at 38%. 
 
    ![Hist_returns](./images/Hist_returns.png)
 
 Comparing this to ETH, which is a reasonable benchmark for most coins, the return over a similar period (assuming the strategies started in mid 2021- mid 2022 was roughly up 100% to flat depending on the starting point. So on that basis, the strategy did fairly well and I think there are far better ways to maintain exposure to the large moves (10 day EMA break for example which works like a more sophisticated trailing stop) than my current approach which is to be long for 14 days and this accounts for some of the weak results we see in the time series testing where the strategy failed to remain exposed to the big late 2021 moves which were critical for compounding total return over time. Frankly I could also be more robust on the backtesting here, but it's at least directionally encouraging.
 
-#### So in conclusion, in answer to our original problem statement, it appears there may be some, albeit weak correlation between Telegram sentiment and Shill score and forward returns based on regression and Shap analysis. As part of a clustering strategy, the returns do seem to be fairly compelling, though there doesn't seem to be much positive correlation between the mean returns of the clusters and the shill score, sentiment or number of mentions. The social media data is however intersting and can help identify growing hype around a specific coin, as can be seen in the BONK shill score chart above.
+#### So in conclusion, in answer to our original problem statement, it appears there may be some, albeit weak correlation between Telegram sentiment and shill score and forward returns based on regression and Shap analysis. As part of a clustering strategy, the returns do seem to be fairly compelling, though there doesn't seem to be much positive correlation between the mean returns of the clusters and the shill score, sentiment or number of mentions. The social media data is however interesting and can help identify growing hype around a specific coin, as can be seen in the BONK shill score chart above.
 
 It seems that the returns seem to correlate well with more traditional momentum metrics like RSI, 10/20 EMA and also 10/20 acc (ie early change in momentum). Looking at other coins, the clustering approach did generally identify early momentum clusters - ie being early to trades that performed very well and led to outsized returns and this is the key take from the project. We can see that in the charts below for BTC, ETH, RNDR and BONK. These clusters consistently appear to do well and so setting up a buy signal alert dashboard could be an interesting overlay to a discretionary investing approach.
 
