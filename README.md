@@ -127,7 +127,8 @@ It seems that the returns seem to correlate well with more traditional momentum 
    ![RNDR](./images/Returns_RNDR.png)
    
    ![BONK](./images/BONK_plot.png)
-    
+
+DYOR/ Not Financial Advice!
 
 
 
